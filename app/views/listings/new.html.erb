@@ -1,0 +1,24 @@
+<%= form_for (@listing) do |f| %>
+	<%= f.label :type %>
+	<%= f.text_field :name, class: 'form-control' %>
+
+	<%= f.label :bedrooms %>
+	<%= f.text_field :bedroom, class: 'form-control'%>
+
+	<%= f.label :accomodates %>
+	<%= f.text_field :accomodates, class: 'form-control' %>
+
+	<%= f.label :location %>
+	<%= f.text_field :location, class: 'form-control' %>
+
+	<%= f.label :price_per_night %>
+	<%= f.text_field :price_per_night, class: 'form-control' %>
+
+	<br>
+	
+	<%= f.file_field :images, multiple: true %>
+
+	<br>
+
+	<%= f.submit "Create my listing", class: "btn btn-primary" %>
+<% end %>
