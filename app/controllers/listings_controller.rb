@@ -1,8 +1,17 @@
 class ListingsController < ApplicationController
 	before_action :signed_in?, only: [:create, :destroy]
 	
+	def index
+		@listings = Listing.all
+	end
+
+
 	def show
 		@listing = Listing.find(params[:id])
+	end
+
+	def search
+		render json: Listing.search(params[:query], fields: [{location: :text_start}], limit: 10).map(&:location)
 	end
 
 
@@ -11,6 +20,7 @@ class ListingsController < ApplicationController
 	end
 	def create
 
+		byebug
 		@listing = current_user.listings.build(listing_params)
 	
 	
@@ -30,7 +40,8 @@ class ListingsController < ApplicationController
 	private
 
 	def listing_params
-		params.require(:listing).permit(:name, :bedroom, :accomodates, :location, :price_per_night, {images: []})
+		params.require(:listing).permit(:name, :bedroom, :accomodates, :location, :price_per_night, {images: []}, {tags: {}})
+		params.require(:tags).permit(:name)
 	end
 
 end
