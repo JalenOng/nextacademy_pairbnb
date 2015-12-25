@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+  resources :resources do
+	  resources :bookings
+	end
   root 'listings#index'
   get '/auth/facebook', as: :facebook
   get '/auth/facebook/callback' => 'sessions#facebook'
