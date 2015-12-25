@@ -46,6 +46,7 @@ gem 'gon'
 
 gem 'cocoon'
 
+gem 'formtastic'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -40,8 +40,8 @@ class ListingsController < ApplicationController
 	private
 
 	def listing_params
-		params.require(:listing).permit(:name, :bedroom, :accomodates, :location, :price_per_night, {images: []}, {tags: {}})
-		params.require(:tags).permit(:name)
+		params.require(:listing).permit(:name, :bedroom, :accomodates, :location, :price_per_night, {images: []}, tags_attributes: [:id, :name, :_destroy])
+	
 	end
 
 end

@@ -1,35 +1,28 @@
-<%= form_for (@listing) do |f| %>
-	<%= f.label :type %>
-	<%= f.text_field :name, class: 'form-control' %>
-
-	<%= f.label :bedrooms %>
-	<%= f.text_field :bedroom, class: 'form-control'%>
-
-	<%= f.label :accomodates %>
-	<%= f.text_field :accomodates, class: 'form-control' %>
-
-	<%= f.label :location %>
-	<%= f.text_field :location, class: 'form-control' %>
-
-	<%= f.label :price_per_night %>
-	<%= f.text_field :price_per_night, class: 'form-control' %>
-
-
-	<br>
+<%= semantic_form_for @listing do |f| %>
+	<%= f.semantic_errors :state %>
+	<%= f.inputs do %>
 	
-	<%= f.label :images %>
-	<%= f.file_field :images, multiple: true %>
 
-	<br>
+		<%= f.input :bedroom,  class: 'form-control'%>
 
-	<%= f.fields_for :tags do |tag| %>
 
-		<%= tag.label :tag %>
-		<%= tag.text_field :tag, class: 'form-control' %>
+		<%= f.input :accomodates %>
 
+
+		<%= f.input :location %>
+
+
+		<%= f.input :price_per_night %>
+
+		<%= f.semantic_fields_for :reservations do |reservation| %>
+
+			<%= render 'reservation_fields', :f => reservation %>
+
+		<% end %>
+
+	
+		<%= f.actions %>
 	<% end %>
-
-	<br>
-	
-	<%= f.submit "Create my listing", class: "btn btn-primary" %>
 <% end %>
+
+

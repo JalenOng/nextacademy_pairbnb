@@ -1,0 +1,9 @@
+  <%= semantic_form_for ([@listing, @reservation]) do |f| %>
+ 
+    <%= f.inputs do %>
+      <%= f.input :check_in_date %>
+      <%= f.input :check_out_date %>
+    <% end %>
+
+    <%= f.actions %>
+  <% end %>

@@ -38,6 +38,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
+  config.assets.enabled = true
   require 'carrierwave/orm/activerecord'
 
   # Raises error for missing translations
