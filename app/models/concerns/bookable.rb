@@ -2,14 +2,14 @@ module Bookable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :resource
+    belongs_to :listing
 
     validates :start_time, presence: true 
-    validates :length, presence: true, numericality: { greater_than: 0 }
+    # validates :length, presence: true, numericality: { greater_than: 0 }
     validate :start_date_cannot_be_in_the_past
     validate :overlaps
 
-    before_validation :calculate_end_time
+    # before_validation :calculate_end_time
   
 
     scope :end_during, ->(new_start_time, new_end_time) do
@@ -54,16 +54,16 @@ module Bookable
   end
 
   def overlaps
-    overlapping_bookings = [ 
-      resource.bookings.end_during(start_time, end_time),
-      resource.bookings.start_during(start_time, end_time),
-      resource.bookings.happening_during(start_time, end_time),
-      resource.bookings.enveloping(start_time, end_time),
-      resource.bookings.identical(start_time, end_time)
+    overlapping_reservations = [ 
+      listing.reservations.end_during(start_time, end_time),
+      listing.reservations.start_during(start_time, end_time),
+      listing.reservations.happening_during(start_time, end_time),
+      listing.reservations.enveloping(start_time, end_time),
+      listing.reservations.identical(start_time, end_time)
     ].flatten
 
-    overlapping_bookings.delete self
-    if overlapping_bookings.any?
+    overlapping_reservations.delete self
+    if overlapping_reservations.any?
       errors.add(:base, 'Slot has already been booked')
     end
   end
@@ -74,13 +74,13 @@ module Bookable
     end
   end
 
-  def calculate_end_time
-    start_time = validate_start_time
-    length = validate_length
-    if start_time && length
-      self.end_time = start_time + (length.hours - 60)
-    end
-  end
+  # def calculate_end_time
+  #   start_time = validate_start_time
+  #   length = validate_length
+  #   if start_time && length
+  #     self.end_time = start_time + (length.hours - 60)
+  #   end
+  # end
 
 
   def as_json(options = {})  
@@ -103,12 +103,12 @@ module Bookable
       end
     end
 
-    def validate_length
-      if !self.length.nil?
-        length = self.length.to_i
-      else
-        return nil
-      end
-    end
+    # def validate_length
+    #   if !self.length.nil?
+    #     length = self.length.to_i
+    #   else
+    #     return nil
+    #   end
+    # end
 
 end

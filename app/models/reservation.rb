@@ -1,4 +1,4 @@
-require_relative './concerns/bookable'
+# require_relative './concerns/bookable'
 
 class Reservation < ActiveRecord::Base
   include Bookable

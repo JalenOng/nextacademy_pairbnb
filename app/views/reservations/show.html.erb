@@ -1,2 +1,6 @@
-<h1>Reservations#show</h1>
-<p>Find me in app/views/reservations/show.html.erb</p>
+<h3>Booking Confirmation</h3>
+<p>Your booking is confirmed for
+  <%= @listing.name %>:
+  <%= @reservation.start_time.strftime('%e %b %Y') %>
+  until
+  <%= @reservation.end_time.strftime('%e %b %Y') %>

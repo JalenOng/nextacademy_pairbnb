@@ -1,0 +1,10 @@
+<% if @reservation.errors.any? %>
+	<div class="errors">
+		<h3><%= pluralize(@reservation.errors.count, 'error') %></h3>
+		<ul>
+			<% @reservation.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

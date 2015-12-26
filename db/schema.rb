@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(version: 20151225092418) do
   add_index "listings", ["user_id"], name: "index_listings_on_user_id", using: :btree
 
   create_table "reservations", force: :cascade do |t|
-    t.date    "check_in_date"
-    t.date    "check_out_date"
+    t.date    "start_time"
+    t.date    "end_time"
+    t.integer "length"
     t.integer "listing_id"
     t.integer "user_id"
   end

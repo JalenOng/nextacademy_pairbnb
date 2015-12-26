@@ -2,7 +2,10 @@ class ListingsController < ApplicationController
 	before_action :signed_in?, only: [:create, :destroy]
 	
 	def index
-		@listings = Listing.all
+		# @listings = Listing.all
+		# @listings = Listing.joins(:reservations).group("reservation.listing_id").order("count(reservation.listing_id) desc")
+		@listings = Listing.paginate(page: params[:page], :per_page => 5).order(created_at: :desc)
+
 	end
 
 
@@ -20,7 +23,7 @@ class ListingsController < ApplicationController
 	end
 	def create
 
-		byebug
+
 		@listing = current_user.listings.build(listing_params)
 	
 	

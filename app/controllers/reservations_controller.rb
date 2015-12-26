@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  respond_to :html. :json
+  respond_to :html, :json
   before_action :get_listing
 
   def get_listing
@@ -21,12 +21,16 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    byebug
   
     @reservation = current_user.reservations.build(reservation_params)
     @reservation.listing = @listing
+
+    @host = "jalen.ong@gmail.com"
+ 
     if @reservation.save
-      redirect_to listing_reservation_path(@listing, method: :get)
+      # ReservationMailer.booking_email(current_user.email, @host, @listing.id, @reservation.id).deliver_now
+      ReservationJob.perform_later(current_user.email, @host, @listing.id, @reservation.id)
+      redirect_to [@listing, @reservation]
     else
       render 'new'
     end
@@ -69,17 +73,17 @@ class ReservationsController < ApplicationController
 
   private
 
-  def save reservation
-    if @reservation.save
+  # def save booking
+  #   if @reservation.save
 
-      flash[:notice] = "booking added"
-      redirect_to listing_reservation_path(@listing, @reservation)
+  #     flash[:notice] = "booking added"
+  #     redirect_to listing_reservation_path(@listing, @reservation)
 
-    else
-      render 'new'
-    end
+  #   else
+  #     render 'new'
+  #   end
 
-  end
+  # end
 
   def reservation_params
     params.require(:reservation).permit(:listing_id, :start_time, :end_time, :length)
