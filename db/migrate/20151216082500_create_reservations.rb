@@ -6,6 +6,7 @@ class CreateReservations < ActiveRecord::Migration
       t.integer :length
       t.integer :listing_id
       t.integer :user_id
+     
     
     end
   end

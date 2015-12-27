@@ -4,6 +4,9 @@ class TransactionsController < ApplicationController
   	gon.client_token = generate_client_token
   end
 
+  def create
+  	byebug
+  end
   private
 
   def generate_client_token
