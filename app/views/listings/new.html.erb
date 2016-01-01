@@ -1,28 +1,41 @@
-<%= semantic_form_for @listing do |f| %>
-	<%= f.semantic_errors :state %>
-	<%= f.inputs do %>
-	
-		<%= f.input :name %>
-		<%= f.input :bedroom %>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+
+<%= form_for(@listing) do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name, class: 'form-control' %>
+
+<%= f.label :bedroom %>
+<%= f.text_field :bedroom, class: 'form-control' %>
+
+<%= f.label :accomodates %>
+<%= f.text_field :accomodates, class: 'form-control' %>
+
+<%= f.label :location %>
+<%= f.text_field :location, class: 'form-control' %>
+
+<%= f.label :price_per_night %>
+<%= f.text_field :price_per_night, class: 'form-control' %>
 
 
-		<%= f.input :accomodates %>
+<%= f.fields_for :tags do |tag| %>
 
+	<%= tag.label :tag %>
+	<%= tag.text_field :name, class: 'form-control' %>
 
-		<%= f.input :location %>
-
-
-		<%= f.input :price_per_night %>
-
-		<%= f.semantic_fields_for :reservations do |reservation| %>
-
-			<%= render 'reservation_fields', :f => reservation %>
-
-		<% end %>
-
-	
-		<%= f.actions %>
-	<% end %>
 <% end %>
+
+<br>
+<br>
+<%= f.file_field :images, multiple: true %>
+
+<br>
+
+<%= f.submit "Create listing", class: "btn btn-primary" %>
+
+<% end %>
+
+</div>
+</div>
 
 

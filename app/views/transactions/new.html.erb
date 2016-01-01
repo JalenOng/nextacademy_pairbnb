@@ -1,8 +1,11 @@
-<form id="checkout" method="post" action="/checkout">
-  <div id="payment-form"></div>
-  <input type="submit" value="Pay $10">
-</form>
 
+
+<%= form_tag(listing_reservation_transactions_path, method: "post", multipart: true, id: "checkout")do  %>
+	 <div id="payment-form"></div>
+	 <%= submit_tag 'Submit' %>
+<% end %>
+<!-- 
+form_tag({controller: "people", action: "search"}, method: "get", class: "nifty_form") -->
 <script>
 
 braintree.setup(gon.client_token, "dropin", {
@@ -10,3 +13,4 @@ braintree.setup(gon.client_token, "dropin", {
 });
 
 </script>
+

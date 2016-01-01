@@ -11,6 +11,7 @@ class ListingsController < ApplicationController
 
 	def show
 		@listing = Listing.find(params[:id])
+
 	end
 
 	def search
@@ -20,9 +21,9 @@ class ListingsController < ApplicationController
 
 	def new
 		@listing = current_user.listings.new
+		@tag = @listing.tags.build
 	end
 	def create
-
 
 		@listing = current_user.listings.build(listing_params)
 	

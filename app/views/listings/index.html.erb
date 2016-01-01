@@ -5,7 +5,7 @@
 
 
   
-  <%=link_to "Checkout", new_transaction_path, class: "button" %>
+
 
   <%= link_to "Create new listing", new_listing_path, class: "btn btn-default" %>
 
@@ -26,6 +26,8 @@
     <br><br>
     
     <%= will_paginate @listings %>
+    <br>
+    <br>
     <%= render @listings %>
     <%= will_paginate @listings %>
 

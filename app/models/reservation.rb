@@ -5,6 +5,7 @@ class Reservation < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :listing
 
+
 	def get_reservation_amt(listing)
 
 

@@ -7,11 +7,16 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#facebook'
   get '/search' => 'listings#search'
 
+  post '/checkout' => 'transactions#create'
+
   resources :listings do
-    resources :reservations
+    resources :reservations do 
+    	resources :transactions, only: [:new, :create]
+    end
+
   end
 
-  resources :transactions, only: [:new, :create]
+
   
 
 end

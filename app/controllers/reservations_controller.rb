@@ -27,15 +27,12 @@ class ReservationsController < ApplicationController
 
     @reservation.get_reservation_amt(@listing)
 
-    
-
-
     @host = "jalen.ong@gmail.com"
  
     if @reservation.save
       # ReservationMailer.booking_email(current_user.email, @host, @listing.id, @reservation.id).deliver_now
       ReservationJob.perform_later(current_user.email, @host, @listing.id, @reservation.id)
-      redirect_to new_transaction_path
+      redirect_to new_listing_reservation_transaction_path(@listing, @reservation)
       # redirect_to [@listing, @reservation]
     else
       render 'new'

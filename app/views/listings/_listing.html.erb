@@ -29,6 +29,16 @@ Price per night: RM <%= listing.price_per_night %>
 
 <br> 
 
+Tags: 
+
+<% if listing.tags.present? %>
+	<% listing.tags.each do |tag| %>
+	<%= tag.name %>
+	<% end %>
+<% end %>
+
+<br>
+
 Created by: <%= listing.user.email %>
 
 <br>
