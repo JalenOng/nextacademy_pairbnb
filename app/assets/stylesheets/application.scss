@@ -26,41 +26,42 @@ html {
 
 body {
   margin-bottom: 3em;
-  background: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.3), 
-      rgba(0, 0, 0, 0.3)
-    ),
-  asset_url("sample_cover.jpg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-  background-size: cover;
+  background: white;
+    // linear-gradient(
+    //   rgba(0, 0, 0, 0.3), 
+    //   rgba(0, 0, 0, 0.3)
+    // );
   font-family: 'Open Sans', sans-serif;
   height: 100%;
+}
+
+.container {
+  margin: 0 auto;
 }
 
 .hero-header {
   text-align: center;
   height: 500px;
+  width: 100%;
   padding-top: 10%;
   text-transform: uppercase;
   color: #fff;
-  .main-text {
-    letter-spacing: 6px;
-    font-size: 70px;
-    margin-bottom: 20px;
-  }
-  .sub-text {
-    font-size: 30px;
-    letter-spacing: 4px;
-    font-weight: lighter;
-  }
+  background: asset_url("sample_cover.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  background-size: cover;
 }
 
-.container {
-  margin: 20px;
-  padding: 20px;
+.main-text {
+  letter-spacing: 6px;
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+.sub-text {
+  font-size: 30px;
+  letter-spacing: 4px;
+  font-weight: lighter;
 }
 
 /*----- Para -----*/
