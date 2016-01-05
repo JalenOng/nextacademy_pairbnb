@@ -5,7 +5,6 @@
 	    <!--li>%= # link_to "Login", sign_in_path %></li>
 	    <li>%= # link_to "Signup", sign_up_path %></li>
 	    <li>%= # link_to "About Us", "#" %></li-->
-	    <li><%= link_to "Create new listing", new_listing_path %></li>
 	  </ul>
 	  <div class="menu-search input-group">
       <input type="text" class="form-control" placeholder="Search for...">
@@ -18,6 +17,7 @@
   <ul>
 	  <% if signed_in? %>
 	    <li>Hi, <%= current_user.email %></li>
+	    <li><%= link_to "Create new listing", new_listing_path %></li>
 	    <li><%= link_to 'Sign out', sign_out_path, method: :delete %></li>
 		<% else %>
 	    <li><%= link_to 'Sign in', sign_in_path %></li>
