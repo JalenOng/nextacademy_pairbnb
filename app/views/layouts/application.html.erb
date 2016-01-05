@@ -1,66 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta tag="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta tag="viewport" content="width=device-width, initial-scale=1.0">
 
-  <%= csrf_meta_tags %>  
+    <%= csrf_meta_tags %>  
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
-  
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
-  <title>Pairbnb</title>
+    <title>Pairbnb</title>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-  <!-- Latest compiled JavaScript -->
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag :cocoon %>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag :cocoon %>
 
-  <%= include_gon %>
- 
-  
+    <%= include_gon %>
+   
+    
 
-</head>
-<body>
+  </head>
+  <body>
 
-<%= render partial: "layouts/navbar" %>
+    <%= render partial: "layouts/navbar" %>
 
-<% if signed_in? %>
-      Signed in as: <%= current_user.email %>
-      <%= button_to 'Sign out', sign_out_path, method: :delete %>
-<% else %>
-      <%= link_to 'Sign in', sign_in_path %>
-      <%= link_to 'Sign in with Facebook', facebook_url %>
-    <% end %>
+        <div id="flash">
+          <% flash.each do |key, value| %>
+            <div class="flash <%= key %>"><%= value %></div>
+          <% end %>
+        </div>
 
-    <div id="flash">
-      <% flash.each do |key, value| %>
-        <div class="flash <%= key %>"><%= value %></div>
-      <% end %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+    <div class="pusher"></div>
+    <div id="footer">
+      <ul>
+        <li>About Us</li>
+        <li>Privacy</li>
+        <li>Terms</li>
+        <li>Contact Us</li>
+        <li>Signup for newsletter</li>
+      </ul>
     </div>
 
-
-<div class="container">
-  <%= yield %>
-</div>
-<div class="pusher"></div>
-<div id="footer">
-  <ul>
-    <li>About Us</li>
-    <li>Privacy</li>
-    <li>Terms</li>
-    <li>Contact Us</li>
-    <li>Signup for newsletter</li>
-  </ul>
-</div>
-
-</body>
+  </body>
 </html>
