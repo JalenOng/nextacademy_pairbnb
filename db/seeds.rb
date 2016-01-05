@@ -26,3 +26,7 @@ User.all.each do |user|
 	end
 end
 
+puts "\n= == === ==== ===== (\"\\( ^ o ^ )/\") ===== ==== === == ="
+puts "\n  Success! You can login using the credentials below:"
+puts "\n     email: tom@cruise.com        password: 123456"
+puts "\n= == === ==== ===== ====== * ====== ===== ==== === == ="
