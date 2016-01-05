@@ -26,33 +26,22 @@
 
     <%= include_gon %>
    
-    
-
   </head>
   <body>
 
     <%= render partial: "layouts/navbar" %>
 
-        <div id="flash">
-          <% flash.each do |key, value| %>
-            <div class="flash <%= key %>"><%= value %></div>
-          <% end %>
-        </div>
-
+    <div id="flash">
+      <% flash.each do |key, value| %>
+        <div class="flash <%= key %>"><%= value %></div>
+      <% end %>
+    </div>
 
     <div class="container">
       <%= yield %>
     </div>
     <div class="pusher"></div>
-    <div id="footer">
-      <ul>
-        <li>About Us</li>
-        <li>Privacy</li>
-        <li>Terms</li>
-        <li>Contact Us</li>
-        <li>Signup for newsletter</li>
-      </ul>
-    </div>
+    <%= render partial: "layouts/footer" %>
 
   </body>
 </html>
