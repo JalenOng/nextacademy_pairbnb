@@ -28,20 +28,45 @@
    
   </head>
   <body>
-
-    <%= render partial: "layouts/navbar" %>
-
-    <div id="flash">
-      <% flash.each do |key, value| %>
-        <div class="flash <%= key %>"><%= value %></div>
-      <% end %>
-    </div>
-
-    <div class="container">
+    <% if yield(:page) == 'home' %>
+      <%= render 'nav/home_nav' %>
+    <% else %>
+      <%= render 'nav/nav' %>
+    <% end %>
+    
+    <% if flash.presence %>
+      <div id="flash">
+        <%= image_tag 'notice_bubble.png' %>
+        <% flash.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+    <% elsif @notice.presence %>
+      <div id="flash">
+        <%= image_tag 'notice_bubble.png' %>
+        <% @notice.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+    <% end %>
+    <% if yield(:banner).presence %>
+      <div id="banner-<%= yield(:banner) %>" style="background: url(<%= yield(:banner_image) if !yield(:banner_image).nil? %>); background-size: cover; background-position: 100% 50%;">
+      </div>
+    <% else %>
+      <br>
+    <% end %>
+    <div id="main-container">
       <%= yield %>
     </div>
-    <div class="pusher"></div>
-    <%= render partial: "layouts/footer" %>
-
+    <div class="push"></div>
+    <footer>
+      <ul>
+        <li>About Us</li>
+        <li>Privacy</li>
+        <li>Terms</li>
+        <li>Contact Us</li>
+        <li>Signup for newsletter</li>
+      </ul>
+    </footer>
   </body>
 </html>
