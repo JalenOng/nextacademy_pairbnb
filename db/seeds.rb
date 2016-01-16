@@ -10,27 +10,40 @@
 
 # Create admin
 User.create(email: "tom@cruise.com", password: "123456")
+puts "==============================================================================="
+puts "Admin user created!"
+puts "==============================================================================="
 
 # Creates dummy users
+
+puts "\n==============================================================================="
 5.times do
 	User.create(email: Faker::Internet.email, password: "123456")
 end
+puts "==============================================================================="
+puts "Total number of users created: #{User.all.count}\n\n"
 
 # Creates random number of listings
 
+puts "\n==============================================================================="
 User.all.each do |user|
 	rand(1..3).times do
 		listing = user.listings.create(name: Faker::Hipster.sentence(3),
 												 bedroom: rand(1..5),
-												 accomodates: rand(2..5),
+												 accomodates: rand(1..5),
 												 location: Faker::Address.country,
-												 price_per_night: rand(80..250))
-		listing.images = [Pathname.new(Rails.root + 'app/assets/images/sample_listing_image.jpg').open]
+												 price_per_night: rand(40..500))
+		listing.images = [Pathname.new(Rails.root + "app/assets/images/listings/#{rand(1..12)}.jpg").open]
 		listing.save!
 	end
+	puts "==============================================================================="
+	puts "#{user.listings.all.count} listing(s) created for #{user.email}!"
+	puts "==============================================================================="
 end
+puts "Total number of listings created: #{Listing.all.count}"
+puts "===============================================================================\n\n"
 
-puts "\n= == === ==== ===== (\"\\( ^ o ^ )/\") ===== ==== === == ="
-puts "\n  Success! You can login using the credentials below:"
-puts "\n     email: tom@cruise.com        password: 123456"
-puts "\n= == === ==== ===== ====== * ====== ===== ==== === == ="
+puts "\n=============================== (\"\\( ^ o ^ )/\") ==============================="
+puts "              Success! You can login using the credentials below:"
+puts "                 email: tom@cruise.com        password: 123456"
+puts "==============================================================================="
