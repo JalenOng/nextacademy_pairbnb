@@ -1,6 +1,12 @@
+@import "variables";
+
 .digg_pagination {
-  background: white;
+  background: $light-grey;
   cursor: default;
+  margin-bottom: 20px;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
   /* self-clearing method: */ }
   .digg_pagination a, .digg_pagination span, .digg_pagination em {
     padding: 0.2em 0.5em;
