@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   end
 
 
+  resources :tags, only: :show
+
+
   
 
 end
