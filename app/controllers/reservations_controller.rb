@@ -27,7 +27,7 @@ class ReservationsController < ApplicationController
 
     @reservation.get_reservation_amt(@listing)
 
-    @host = "jalen.ong@gmail.com"
+    @host = "bestofthesoul@gmail.com"
  
     if @reservation.save
       # ReservationMailer.booking_email(current_user.email, @host, @listing.id, @reservation.id).deliver_now
