@@ -22,6 +22,10 @@ gem 'turbolinks'
 gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# Use Font Awesome
+gem 'font-awesome-rails'
+# Clear UTF-8 issues
+gem 'utf8-cleaner'
 
 gem 'devise'
 

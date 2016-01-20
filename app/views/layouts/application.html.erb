@@ -1,73 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Pairbnb</title>
+  <head>
+    <meta tag="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>  
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag :cocoon %>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-  <%= include_gon %>
- 
-  <%= csrf_meta_tags %>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <meta tag="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
+    <title>Waterbnb</title>
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-    <!-- jQuery library -->
-  
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag :cocoon %>
 
-  
-
-  <!-- Latest compiled JavaScript -->
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-  <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
-
-
-
-
-  
-
-</head>
-<body>
-
-<%= render partial: "layouts/navbar" %>
-
-<% if signed_in? %>
-      Signed in as: <%= current_user.email %>
-      <%= button_to 'Sign out', sign_out_path, method: :delete %>
-<% else %>
-      <%= link_to 'Sign in', sign_in_path %>
-      <%= link_to 'Sign in with Facebook', facebook_url %>
+    <%= include_gon %>
+   
+  </head>
+  <body>
+    <% if yield(:page) == 'home' %>
+      <%= render 'nav/home_nav' %>
+    <% else %>
+      <%= render 'nav/nav' %>
     <% end %>
-
-    <div id="flash">
-      <% flash.each do |key, value| %>
-        <div class="flash <%= key %>"><%= value %></div>
-      <% end %>
+    
+    <% if flash.presence %>
+      <div id="flash">
+        <%= image_tag 'notice_bubble.png' %>
+        <% flash.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+    <% elsif @notice.presence %>
+      <div id="flash">
+        <%= image_tag 'notice_bubble.png' %>
+        <% @notice.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+    <% end %>
+    <% if yield(:banner).presence %>
+      <div id="banner-<%= yield(:banner) %>" style="background: url(<%= yield(:banner_image) if !yield(:banner_image).nil? %>); background-size: cover; background-position: 100% 50%;">
+      </div>
+    <% else %>
+      <br>
+    <% end %>
+    <div id="main-container">
+      <%= yield %>
     </div>
-
-
-<div class="container">
-  <%= yield %>
-</div>
-<div class="pusher"></div>
-<div id="footer">
-  <ul>
-    <li>About Us</li>
-    <li>Privacy</li>
-    <li>Terms</li>
-    <li>Contact Us</li>
-    <li>Signup for newsletter</li>
-  </ul>
-</div>
-
-</body>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>
