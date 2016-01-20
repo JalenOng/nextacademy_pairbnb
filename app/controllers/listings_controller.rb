@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
 	before_action :signed_in?, only: [:create, :destroy]
-	
+
 	def index
 		# @listings = Listing.all
 		# @listings = Listing.joins(:reservations).group("reservation.listing_id").order("count(reservation.listing_id) desc")
@@ -13,20 +13,23 @@ class ListingsController < ApplicationController
 	end
 
 	def search
-		render json: Listing.search(params[:query], fields: [{location: :text_start}], limit: 10).map(&:location)
+		@listings = Listing.search(params[:query])
+		render :index
 	end
 
 
 	def new
-		@listing = current_user.listings.new
-		# @tag = @listing.tags.build
+		if current_user
+			@listing = current_user.listings.new
+		else
+			redirect_to sign_in_path
+		end
 	end
 
 
 	def create
 
 		@listing = current_user.listings.build(listing_params)
-# byebug
 		@tag = params[:listing][:tag][:name]
 		@taglist = @tag.downcase.split(",")
 		@taglist.each{|x| x.gsub!(" ","")}
@@ -54,7 +57,7 @@ class ListingsController < ApplicationController
 	def update
 
 	end
-	
+
 	def destroy
 	end
 
@@ -64,7 +67,7 @@ class ListingsController < ApplicationController
 		# params.require(:listing).permit(:name, :bedroom, :accomodates, :location, :price_per_night, {images: []}, tags_attributes: [:id, :name, :_destroy])
 
 		params.require(:listing).permit(:name, :bedroom, :accomodates, :location, :price_per_night, {images: []}, :tags)
-	
+
 	end
 
 end

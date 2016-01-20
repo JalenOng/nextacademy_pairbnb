@@ -5,13 +5,14 @@ class Listing < ActiveRecord::Base
   belongs_to :user
 	accepts_nested_attributes_for :reservations, allow_destroy: true
 
-
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :listing_tags
 
+  searchkick
+
 	# accepts_nested_attributes_for :reservations, reject_if: :all_blank, allow_destroy: true
 
-	
+
 	mount_uploaders :images, ImageUploader
 	# searchkick
 end
