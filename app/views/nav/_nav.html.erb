@@ -20,7 +20,9 @@
 			<% if logged_in? && !current_user.listings.empty? %>
 				<%= link_to 'Host', listings_path %>
 			<% else %>
-				<span class="host"><a href="<%= new_listing_path %>">Become a Host</a></span>
+				<span class="host">
+					<%= link_to "Become a host", new_listing_path %>
+				</span>
 			<% end %>
 		</div>
 	</div>

@@ -19,8 +19,11 @@ class ListingsController < ApplicationController
 
 
 	def new
-		@listing = current_user.listings.new
-		# @tag = @listing.tags.build
+		if current_user
+			@listing = current_user.listings.new
+		else
+			redirect_to sign_in_path
+		end
 	end
 
 

@@ -5,17 +5,6 @@
   </div>
 <% end %>
 
-<div class="listings-search pull-right">
-  <%= form_tag '/search', method: :post, class: 'form-inline' do %>
-    <div class="form-group">
-      <%= text_field_tag :query, params[:query], class: 'form-control' %>
-      <%= submit_tag 'Search for listings', class: 'btn btn-default' %>
-    </div>
-  <% end %>
-</div>
-
-  <%= link_to "Create new listing", new_listing_path, class: "btn btn-default" %>
-
   <br><br>
 
   <%= will_paginate @listings, class: "digg_pagination" %>
