@@ -1,11 +1,9 @@
-<div class="hero-header">
-  <div class="main-text">Pair BnB</div>
-  <div class="sub-text">A place to find your next home</div>
-</div>
-
-
-  
-
+<% if current_user.nil? %>
+  <div class="hero-header">
+    <div class="main-text">Pair BnB</div>
+    <div class="sub-text">A place to find your next home</div>
+  </div>
+<% end %>
 
   <%= link_to "Create new listing", new_listing_path, class: "btn btn-default" %>
 
@@ -25,11 +23,11 @@
 
     <br><br>
     
-    <%= will_paginate @listings %>
+    <%= will_paginate @listings, class: "digg_pagination" %>
     <br>
     <br>
     <%= render @listings %>
-    <%= will_paginate @listings %>
+    <%= will_paginate @listings, class: "digg_pagination"  %>
 
 
 <div class="div-one">

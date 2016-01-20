@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
 
-  root 'listings#index'
+  root 'home#index'
   get '/auth/facebook', as: :facebook
   get '/auth/facebook/callback' => 'sessions#facebook'
   get '/search' => 'listings#search'
