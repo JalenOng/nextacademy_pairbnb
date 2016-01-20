@@ -1,3 +1,16 @@
 == README
 
-This repository has been created for NextAcademy students. Clone me and complete the frontend challenges in Week 6.
+
+-------------------------------
+
+1. Bundle exec rake db:create
+2. Bundle exec rake db:migrate
+3. Bundle exec rake db:seed
+
+-------------------------------
+
+To start searchkick:
+
+1. In the terminal, run 'elasticsearch'
+2. In a separate tab in the terminal, run 'rake searchkick:reindex CLASS=Listing'
+3. run 'bundle exec rails s'
