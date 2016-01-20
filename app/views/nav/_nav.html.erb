@@ -9,7 +9,7 @@
 	</div>
 	<div class="nav">
 		<% if signed_in? %>
-		  <div class="nav-hover" style="padding-top: 20px; padding-bottom: 20px;"><a href="/users/<%= current_user.id %>"><%= current_user.name %><%= image_tag current_user.avatar, class: 'avatar avatar' %></a></div>
+		  <div class="nav-hover" style="padding-top: 20px; padding-bottom: 20px;"><a href="/users/<%= current_user.id %>"><%= current_user.name %>, class: 'avatar avatar' %></a></div>
 		  <div class="nav-hover"><%= link_to 'Sign out', sign_out_path, method: :delete %></div>
 		<% else %>
 		  <div class="nav-hover"><%= link_to 'Log In', sign_in_path %></div>
