@@ -39,7 +39,7 @@ gem 'fog'
 
 gem 'rails_12factor'
 
-# gem 'searchkick'
+gem 'searchkick'
 
 gem 'braintree'
 gem 'figaro', '~> 0.7.0'

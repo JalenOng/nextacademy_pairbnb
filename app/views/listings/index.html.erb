@@ -3,33 +3,27 @@
   <div class="sub-text">A place to find your next home</div>
 </div>
 
+<div class="listings-search pull-right">
+  <%= form_tag '/search', method: :post, class: 'form-inline' do %>
+    <div class="form-group">
+      <%= text_field_tag :query, params[:query], class: 'form-control' %>
+      <%= submit_tag 'Search for listings', class: 'btn btn-default' %>
+    </div>
+  <% end %>
+</div>
 
-  
+
 
 
   <%= link_to "Create new listing", new_listing_path, class: "btn btn-default" %>
 
-  <input type="text" id="query" name="query" />
+  <br><br>
 
-  <script src="jquery.js"></script>
-  <script src="typeahead.js"></script>
-  <script>
-    $("#query").typeahead({
-      name: "city",
-      remote: "/search"
-    });
-  </script>
-<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-</button>
-
-    <br><br>
-    
-    <%= will_paginate @listings %>
-    <br>
-    <br>
-    <%= render @listings %>
-    <%= will_paginate @listings %>
+  <%= will_paginate @listings %>
+  <br>
+  <br>
+  <%= render @listings %>
+  <%= will_paginate @listings %>
 
 
 <div class="div-one">
