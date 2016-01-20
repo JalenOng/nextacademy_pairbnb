@@ -8,7 +8,7 @@ class TransactionsController < ApplicationController
   end
 
   def new
- 	
+
   	gon.client_token = generate_client_token
   end
 
@@ -18,18 +18,18 @@ class TransactionsController < ApplicationController
   	nonce = params[:payment_method_nonce]
 
   # Use payment method nonce here...
-  
+
 
   	sale_result = Braintree::Transaction.sale(
-  	:amount => "RM2500",
+  	:amount => 1000,
   	:payment_method_nonce => nonce
 		)
-  	
+
     result = Braintree::TestTransaction.settle(sale_result.transaction.id)
 
-    byebug
+    # byebug
     result = Braintree::TestTransaction.settlement_confirm(sale_result.transaction.id)
-    byebug
+    # byebug
 
     if result
   	 redirect_to [@listing, @reservation]
