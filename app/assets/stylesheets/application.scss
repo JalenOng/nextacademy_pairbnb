@@ -14,10 +14,9 @@
  *= require_self
  *= require_tree .
  *= require formtastic
-
-
-
  */
+
+@import "variables";
 
 html {
   position: relative;
@@ -185,6 +184,13 @@ body {
   padding: 10px;
   color: white;
   background-color: #5cb85c;
+}
+
+.btn-pink {
+  border-color: $pink;
+  border-bottom-color: #e00007;
+  background-color: $pink;
+  color: #fff;
 }
 
 @media screen and (min-width: 480px) {

@@ -4,10 +4,8 @@
 </div>
 <div class="home-search center-content">
   <%= form_tag '/search', method: :post, class: 'form-inline' do %>
-    <div class="form-group">
-      <%= text_field_tag :query, params[:query], class: 'form-control' %>
-      <%= submit_tag 'Search for listings', class: 'btn btn-default' %>
-    </div>
+      <%= text_field_tag :query, params[:query], class: 'form-control search-input', placeholder: "Where do you want to go?" %>
+      <%= submit_tag 'Search', class: 'btn btn-md btn-pink' %>
   <% end %>
 </div>
 <!--div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div-->
