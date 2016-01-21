@@ -18,14 +18,12 @@
 <%= f.text_field :price_per_night, class: 'form-control' %>
 
 
-<%= f.fields_for :tags do |tag| %>
 
-	<%= tag.label :tag %>
-	<%= tag.text_field :name, class: 'form-control' %>
-
+<%= f.label :tags %>
+<%= f.fields_for :tag do |x| %>
+  <%= x.text_field :name, class: 'form-control' %>
 <% end %>
 
-<br>
 <br>
 <%= f.file_field :images, multiple: true %>
 

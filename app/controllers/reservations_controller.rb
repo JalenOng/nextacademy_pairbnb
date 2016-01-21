@@ -17,18 +17,18 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = @listing.reservations.new
- 
+
   end
 
   def create
-  
+
     @reservation = current_user.reservations.build(reservation_params)
     @reservation.listing = @listing
 
     @reservation.get_reservation_amt(@listing)
 
-    @host = "jalen.ong@gmail.com"
- 
+    @host = "bestofthesoul@gmail.com"
+
     if @reservation.save
       # ReservationMailer.booking_email(current_user.email, @host, @listing.id, @reservation.id).deliver_now
       ReservationJob.perform_later(current_user.email, @host, @listing.id, @reservation.id)
@@ -37,8 +37,8 @@ class ReservationsController < ApplicationController
     else
       render 'new'
     end
-  
-    
+
+
   end
 
   def edit
@@ -76,17 +76,6 @@ class ReservationsController < ApplicationController
 
   private
 
-  # def save booking
-  #   if @reservation.save
-
-  #     flash[:notice] = "booking added"
-  #     redirect_to listing_reservation_path(@listing, @reservation)
-
-  #   else
-  #     render 'new'
-  #   end
-
-  # end
 
   def reservation_params
     params.require(:reservation).permit(:listing_id, :start_time, :end_time, :length)
