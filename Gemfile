@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+# gem 'rails-erd'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -43,7 +43,7 @@ gem 'fog'
 
 gem 'rails_12factor'
 
-# gem 'searchkick'
+gem 'searchkick'
 
 gem 'braintree'
 gem 'figaro', '~> 0.7.0'

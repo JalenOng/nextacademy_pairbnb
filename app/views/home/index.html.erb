@@ -3,10 +3,12 @@
 	<%= video_tag(["waterbnb.webm", "waterbnb.mp4"], class: "fullscreen-bg__video", poster: "home_videoframe.png", autoplay: true, loop: true )%>
 </div>
 <div class="home-search center-content">
-	<form action="<%= listings_path %>">
-		<input type="text" class="form-control" placeholder="Where do you want to go?" style="width:60%;" name="search">
-		<input type="submit" value="Search" class="btn btn-large btn-pink">
-	</form>
+  <%= form_tag '/search', method: :post, class: 'form-inline' do %>
+    <div class="form-group">
+      <%= text_field_tag :query, params[:query], class: 'form-control' %>
+      <%= submit_tag 'Search for listings', class: 'btn btn-default' %>
+    </div>
+  <% end %>
 </div>
 <!--div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div-->
 

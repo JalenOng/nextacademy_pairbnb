@@ -32,9 +32,11 @@ Price per night: RM <%= listing.price_per_night %>
 Tags: 
 
 <% if listing.tags.present? %>
+
 	<% listing.tags.each do |tag| %>
-	<%= tag.name %>
-	<% end %>
+
+	<a href="/tags/<%= tag.id %>"><%= tag.name %></a>
+  <% end %>
 <% end %>
 
 <br>
