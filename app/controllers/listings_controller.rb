@@ -4,12 +4,19 @@ class ListingsController < ApplicationController
 	def index
 		# @listings = Listing.all
 		# @listings = Listing.joins(:reservations).group("reservation.listing_id").order("count(reservation.listing_id) desc")
-		@listings = Listing.paginate(page: params[:page], :per_page => 5).order(created_at: :desc)
+		# @listings = Listing.paginate(page: params[:page], :per_page => 5).order(created_at: :desc)
+
+		if params[:search]
+			@listings = Listing.where(location: params[:search].downcase).paginate(:page => params[:page], :per_page => 6).order('created_at DESC')
+		else
+			@listings = current_user.listings.paginate(:page => params[:page], :per_page => 6).order('created_at DESC')
+		end
 	end
 
 
 	def show
 		@listing = Listing.find(params[:id])
+		@reservation = Reservation.new
 	end
 
 	def search

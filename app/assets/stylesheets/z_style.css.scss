@@ -330,7 +330,6 @@ hr {
 .btn-block {
 	display: block;
 	white-space: normal;
-	// width: 100%;
 }
 
 .icon-btn.btn-large {
@@ -472,12 +471,11 @@ footer {
 	font-size: 5px;
 }
 
-
-
-
-
-
-
-
-
-
+/* Bootstrap Css Map Fix*/
+#map-container #map-canvas img {
+  max-width: none;
+}
+/* Bootstrap Css Map Fix*/
+#map-container #map-canvas label {
+  width: auto; display:inline;
+}
