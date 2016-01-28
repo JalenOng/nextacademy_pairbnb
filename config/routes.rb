@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
-
-
   root 'home#index'
+
   get '/auth/facebook', as: :facebook
   get '/auth/facebook/callback' => 'sessions#facebook'
   post '/search' => 'listings#search'
@@ -16,5 +15,6 @@ Rails.application.routes.draw do
   end
 
   resources :tags, only: :show
+  resources :users
 
 end

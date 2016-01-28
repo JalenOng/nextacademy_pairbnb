@@ -25,7 +25,8 @@
 					</div>
 					<div class="listing-item-info">
 						<div class="listing-location">
-							<%= "Apartment" %> · <%= listing.location.capitalize %> · <i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i>
+							<%= "Apartment" %> · <%= listing.location.capitalize %> · <% rand(1..5).times do %>
+							<i class="fa fa-star fa-color-yellow"></i><% end %>
 						</div>
 						<div class="listing-item-user">
 							<a href="/users/<%= listing.user.id %>"><%= image_tag "default_avatar.png", class: 'listing-item-avatar' %></a>

@@ -9,7 +9,9 @@
 
 
 # Create admin
-User.create(email: "tom@cruise.com", password: "123456")
+User.create(email: "tom@cruise.com", 
+						password: "123456",
+						avatar: File.open(Rails.root + 'app/assets/images/mabul.jpg'))
 puts "==============================================================================="
 puts "Admin user created!"
 puts "==============================================================================="
@@ -18,7 +20,9 @@ puts "==========================================================================
 
 puts "\n==============================================================================="
 5.times do
-	User.create(email: Faker::Internet.email, password: "123456")
+	User.create(email: Faker::Internet.email, 
+							password: "123456",
+							avatar: Faker::Avatar.image)
 end
 puts "==============================================================================="
 puts "Total number of users created: #{User.all.count}\n\n"
