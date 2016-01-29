@@ -32,11 +32,11 @@ puts "Total number of users created: #{User.all.count}\n\n"
 puts "\n==============================================================================="
 User.all.each do |user|
 	rand(1..3).times do
-		listing = user.listings.create(name: Faker::Hipster.sentence(3),
-												 bedroom: rand(1..5),
-												 accomodates: rand(1..5),
-												 location: Faker::Address.country,
-												 price_per_night: rand(40..500))
+		listing = user.listings.create(name: Faker::Hipster.sentence(3)[0..30],
+																	 bedroom: rand(1..5),
+																	 accomodates: rand(1..5),
+																	 location: Faker::Address.country,
+																	 price_per_night: rand(40..500))
 		listing.images = [Pathname.new(Rails.root + "app/assets/images/listings/#{rand(1..12)}.jpg").open]
 		listing.save!
 	end

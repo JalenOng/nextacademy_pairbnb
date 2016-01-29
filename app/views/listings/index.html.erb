@@ -13,8 +13,8 @@
                   <%= image_tag reservation.listing.images[0] if !reservation.listing.images[0].nil? %>
                 </div>
                 <div class="listing-reservation-item">
-                  <%= reservation.listing.title %><br>
-                  <%= reservation.checkin.strftime("%e %b %Y") %> until <%= reservation.checkout.strftime("%e %b %Y") %>
+                  <%= reservation.listing.name %><br>
+                  <%= reservation.start_time.strftime("%e %b %Y") %> until <%= reservation.end_time.strftime("%e %b %Y") %>
                 </div>
               </div>
               <div class="listing-reservation-item">
@@ -93,7 +93,7 @@
         }
       });
       return false;
-    }
+    };
 
     $(document).ready(function(){
       debugger;
