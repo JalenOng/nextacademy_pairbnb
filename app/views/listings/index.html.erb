@@ -27,10 +27,10 @@
       <h3 class="listing-tools-title">Filter</h3>
       <hr>
       <div class="listing-reservation-item">
-        <!--%= form_tag filter_listings_path, id: 'filter-form', remote: true do %-->
+        <%= form_tag filter_listings_path, id: 'filter-form', remote: true do %>
           <%= hidden_field_tag :location, @listings.first.location %>
           Price Range <%= text_field_tag :from, nil, class: 'form-control' %> to <%= text_field_tag :to, nil, class: 'form-control' %> <%= submit_tag 'Filter', class: 'btn btn-medium btn-pink', id: 'filter-btn' %>
-        <!--% end %-->
+        <% end %>
       </div>
     </div>
     <div id="listing-container">
