@@ -95,7 +95,7 @@
       return false;
     };
 
-    $(document).ready(function(){
+    $(document).on('ready page:load', function(){
       debugger;
       set_map('', '<%= @listings.first.location %>');
     })
