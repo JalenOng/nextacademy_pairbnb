@@ -4,12 +4,19 @@ class ListingsController < ApplicationController
 	def index
 		# @listings = Listing.all
 		# @listings = Listing.joins(:reservations).group("reservation.listing_id").order("count(reservation.listing_id) desc")
-		@listings = Listing.paginate(page: params[:page], :per_page => 5).order(created_at: :desc)
+		# @listings = Listing.paginate(page: params[:page], :per_page => 5).order(created_at: :desc)
+
+		if params[:search]
+			@listings = Listing.where(location: params[:search].downcase).paginate(:page => params[:page], :per_page => 6).order('created_at DESC')
+		else
+			@listings = current_user.listings.paginate(:page => params[:page], :per_page => 6).order('created_at DESC')
+		end
 	end
 
 
 	def show
 		@listing = Listing.find(params[:id])
+		@reservation = Reservation.new
 	end
 
 	def search
@@ -21,12 +28,11 @@ class ListingsController < ApplicationController
 	def new
 		if current_user
 			@listing = current_user.listings.new
-		else
-			redirect_to sign_in_path
+			@tag = @listing.tags.build
 		end
+		redirect_to sign_in_path, notice: "Please sign in to continue."  and return
 	end
-
-
+	
 	def create
 
 		@listing = current_user.listings.build(listing_params)
@@ -49,6 +55,18 @@ class ListingsController < ApplicationController
 		end
 	end
 
+	def price_range
+		@listings = Listing.where(location: params[:location])
+		
+		params[:from] = "0" if params[:from] == ""
+		params[:to] = "10000" if params[:to] == ""
+		
+		@listings = @listings.where("price >= ? and price <= ?", params[:from], params[:to]).paginate(:page => params[:page], :per_page => 6).order('price ASC')
+
+		respond_to do |format|
+		  format.js
+		end
+	end
 
 	def edit
 

@@ -67,7 +67,7 @@ class ReservationsController < ApplicationController
     if @reservation.destroy
 
       flash[:notice] = "Booking deleted"
-      redirect_to listing_reservation_path(@listing)
+      redirect_to listings_path
 
     else
       render 'index'

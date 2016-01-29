@@ -14,10 +14,9 @@
  *= require_self
  *= require_tree .
  *= require formtastic
-
-
-
  */
+
+@import "variables";
 
 html {
   position: relative;
@@ -25,7 +24,7 @@ html {
 }
 
 body {
-  margin-bottom: 3em;
+  margin: 0;
   background: white;
     // linear-gradient(
     //   rgba(0, 0, 0, 0.3), 
@@ -178,13 +177,20 @@ body {
   }
 }
 
-.flash {
+/* .flash {
   display: flex;
   justify-content: center;
   width: 100%;
   padding: 10px;
   color: white;
   background-color: #5cb85c;
+} */
+
+.btn-pink {
+  border-color: $pink;
+  border-bottom-color: #e00007;
+  background-color: $pink;
+  color: #fff;
 }
 
 @media screen and (min-width: 480px) {

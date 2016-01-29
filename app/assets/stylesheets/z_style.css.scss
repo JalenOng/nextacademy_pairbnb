@@ -162,7 +162,7 @@ hr {
 		color: $dark-grey;
 		display: inline;
 		font-size: .95em;
-		padding: 24px 20px 16px 20px;
+		padding: 24px 20px 38px 20px;
 		height: 27px;
 		border-left: 1px solid $medium-light-grey;
 		vertical-align: middle;
@@ -186,12 +186,16 @@ hr {
 }
 
 .avatar {
-	width: 24px;
-	height: 24px;
+	width: 32px;
+	height: 32px;
 	border: 2px solid $medium-grey;
 	border-radius: 50%;
-	margin: -3px 0 0 10px;
+	margin: -3px 0 0 0px;
 	vertical-align: middle;
+}
+
+.top-fix {
+		margin-top: -7px !important;
 }
 
 .center-content {
@@ -326,7 +330,6 @@ hr {
 .btn-block {
 	display: block;
 	white-space: normal;
-	// width: 100%;
 }
 
 .icon-btn.btn-large {
@@ -468,12 +471,11 @@ footer {
 	font-size: 5px;
 }
 
-
-
-
-
-
-
-
-
-
+/* Bootstrap Css Map Fix*/
+#map-container #map-canvas img {
+  max-width: none;
+}
+/* Bootstrap Css Map Fix*/
+#map-container #map-canvas label {
+  width: auto; display:inline;
+}

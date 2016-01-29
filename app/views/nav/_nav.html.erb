@@ -9,22 +9,28 @@
 	</div>
 	<div class="nav">
 		<% if signed_in? %>
-		  <div class="nav-hover" style="padding-top: 20px; padding-bottom: 20px;"><a href="/users/<%= current_user.id %>"><%= current_user.name %>, class: 'avatar avatar' %></a></div>
+		  <div class="nav-hover"><a href="/users/<%= current_user.id %>"><%= image_tag current_user.avatar, class: 'avatar avatar top-fix' %></a></div>
 		  <div class="nav-hover"><%= link_to 'Sign out', sign_out_path, method: :delete %></div>
 		<% else %>
-		  <div class="nav-hover"><%= link_to 'Log In', sign_in_path %></div>
-			<div class="nav-hover"><%= link_to 'Sign Up', sign_up_path %></div>
+		  <%= link_to sign_in_path do %>
+		  	<div class="nav-hover">Log In</div>
+		  <% end %>
+			<%= link_to sign_up_path do %>
+				<div class="nav-hover">Sign Up</div>
+			<% end %>
 		<% end %>
 		<div class="nav-hover">Help</div>
-		<div style="border-left: none;">
-			<% if logged_in? && !current_user.listings.empty? %>
-				<%= link_to 'Host', listings_path %>
-			<% else %>
+		<% if logged_in? && !current_user.listings.empty? %>
+			<%= link_to listings_path do %>
+				<div class="nav-hover"  style="border-left: none;">Host</div>
+			<% end %>
+		<% else %>
+			<div style="border-left: none;">
 				<span class="host">
 					<%= link_to "Become a host", new_listing_path %>
 				</span>
-			<% end %>
-		</div>
+			</div>
+		<% end %>
 	</div>
 	<div class="clearfix"></div>
 </nav>
