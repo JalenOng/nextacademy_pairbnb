@@ -13,5 +13,6 @@ class Listing < ActiveRecord::Base
 
 	
 	mount_uploaders :images, ImageUploader
-	# searchkick
+	searchkick match: :word_start, searchable: [:location]
 end
+

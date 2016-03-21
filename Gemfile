@@ -39,7 +39,7 @@ gem 'fog'
 
 gem 'rails_12factor'
 
-# gem 'searchkick'
+gem 'searchkick'
 
 gem 'braintree'
 gem 'figaro', '~> 0.7.0'
@@ -81,6 +81,8 @@ end
 group :test do
 	gem 'capybara'
 	gem 'database_cleaner'
+	gem 'shoulda'
+	gem 'mocha'
 
 end
 

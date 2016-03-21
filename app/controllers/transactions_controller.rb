@@ -21,15 +21,15 @@ class TransactionsController < ApplicationController
   
 
   	sale_result = Braintree::Transaction.sale(
-  	:amount => "RM2500",
+  	:amount => @reservation.amount,
   	:payment_method_nonce => nonce
 		)
   	
-    result = Braintree::TestTransaction.settle(sale_result.transaction.id)
+    # result = Braintree::TestTransaction.settle(sale_result.transaction.id)
 
-    byebug
-    result = Braintree::TestTransaction.settlement_confirm(sale_result.transaction.id)
-    byebug
+
+    # result = Braintree::TestTransaction.settlement_confirm(sale_result.transaction.id)
+    
 
     if result
   	 redirect_to [@listing, @reservation]
