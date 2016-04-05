@@ -1,0 +1,21 @@
+
+<h2>TAG: <%= @tag.name %></h2>
+
+<table border="1" style="width:100%">
+<!-- HEADER  -->
+<tr>
+  <th>Listing</th>
+</tr>
+
+<!-- 2nd ROW ONWARDS -->
+<% @tag.listings.each do |listing| %>
+  <tr>
+    <td>
+      <%= link_to listing.name, listing_path(listing.id) %>
+    </td>
+  </tr>
+  <% end %>
+  
+</table>
+
+

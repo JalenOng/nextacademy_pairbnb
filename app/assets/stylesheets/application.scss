@@ -14,48 +14,53 @@
  *= require_self
  *= require_tree .
  *= require formtastic
-
-
-
  */
 
+@import "variables";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
-  padding: 0;
   margin: 0;
-  background: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.3), 
-      rgba(0, 0, 0, 0.3)
-    ),
-  asset_url("sample_cover.jpg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-  background-size: cover;
+  background: white;
+    // linear-gradient(
+    //   rgba(0, 0, 0, 0.3), 
+    //   rgba(0, 0, 0, 0.3)
+    // );
   font-family: 'Open Sans', sans-serif;
+  height: 100%;
+}
+
+.container {
+  margin: 0 auto;
 }
 
 .hero-header {
   text-align: center;
   height: 500px;
+  width: 100%;
   padding-top: 10%;
   text-transform: uppercase;
   color: #fff;
-  .main-text {
-    letter-spacing: 6px;
-    font-size: 70px;
-    margin-bottom: 20px;
-  }
-  .sub-text {
-    font-size: 30px;
-    letter-spacing: 4px;
-    font-weight: lighter;
-  }
+  background: asset_url("sample_cover.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  background-size: cover;
 }
 
-.container {
-  margin: 20px;
-  padding: 20px;
+.main-text {
+  letter-spacing: 6px;
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+.sub-text {
+  font-size: 30px;
+  letter-spacing: 4px;
+  font-weight: lighter;
 }
 
 /*----- Para -----*/
@@ -76,57 +81,27 @@ body {
 }
  
 /*----- Menu -----*/
-  .menu {
-    width:100%;
-    background:#ff5a5f;
-  }
-
-.menu ul {
-  display:inline-block;
-}
- 
-.menu li {
-  margin:0px 50px 0px 0px;
-  float:left;
-  list-style:none;
-  font-size: small;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
- 
-.menu li:last-child {
-  margin-right:0px;
-}
- 
-.menu a {
-  color:#fff;
-  transition:color linear 0.15s;
-  text-decoration: none;
-}
- 
-.menu a:hover, .menu .current-item a {
-  text-decoration:none;
-  color:#303030;
-}
 .menu {
   width:100%;
   background:#ff5a5f;
 }
- 
-.menu ul {
-  display:inline-block;
-}
+
+// .menu ul {
+//   display:inline-block;
+// }
  
 .menu li {
-  margin:0px 50px 0px 0px;
-  float:left;
+  margin-top:5px;
+  // float:left;
   list-style:none;
-  font-size:17px;
+  // font-size: small;
+  // text-transform: uppercase;
+  // letter-spacing: 2px;
 }
  
-.menu li:last-child {
-  margin-right:0px;
-}
+// .menu li:last-child {
+//   margin-right:0px;
+// }
  
 .menu a {
   color:#fff;
@@ -139,16 +114,59 @@ body {
   color:#303030;
 }
 
+.menu .logo {
+  font-weight: 600;
+  a:hover {
+    color: white;
+  }
+}
+
+.menu {
+  width:100%;
+  background:#ff5a5f;
+  display: flex;
+  justify-content: space-between;
+}
+ 
+.menu ul, .menu div {
+  // display:inline-block;
+  display: flex;
+}
+ 
+.menu li, .menu-left, .menu-search {
+//   margin:0px 50px 0px 0px;
+//   float:left;
+//   list-style:none;
+  font-size: 17px;
+  padding: 10px;
+}
+ 
+// .menu li:last-child {
+//   margin-right:0px;
+// }
+ 
+.menu a {
+  color:#fff;
+  transition:color linear 0.15s;
+  text-decoration: none;
+}
+
+.menu-right {
+  display: flex;
+}
+
 #footer {
-  clear: both;
-  position: relative;
-  z-index: 10;
-  height: 3em;
-  margin-top: -3em;
+  // clear: both;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  // z-index: 10;
+  // height: 3em;
+  // margin-top: -3em;
   background-color: black;
   color: white;
   padding: 10px;
-  margin: auto;
+  // margin: auto;
   ul {
     li {
       float: left;
@@ -159,15 +177,24 @@ body {
   }
 }
 
-@media screen and (min-width: 480px) {
-    body {
-        background-color: lightgreen;
-    }
+/* .flash {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  background-color: #5cb85c;
+} */
+
+.btn-pink {
+  border-color: $pink;
+  border-bottom-color: #e00007;
+  background-color: $pink;
+  color: #fff;
 }
 
-
-
-
-
-
-
+@media screen and (min-width: 480px) {
+    // body {
+    //     background-color: lightgreen;
+    // }
+}

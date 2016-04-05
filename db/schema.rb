@@ -11,19 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160105161618) do
+=======
+ActiveRecord::Schema.define(version: 20160121041625) do
+>>>>>>> 79bd2dc746742dddb82966d561fc0650334bb314
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "bookings", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer  "length"
-    t.integer  "resource_id"
-  end
-
-  add_index "bookings", ["resource_id"], name: "index_bookings_on_resource_id", using: :btree
 
   create_table "listing_tags", force: :cascade do |t|
     t.integer "listing_id"
@@ -56,10 +51,6 @@ ActiveRecord::Schema.define(version: 20160105161618) do
     t.float   "amount"
   end
 
-  create_table "resources", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "name"
   end
@@ -71,12 +62,16 @@ ActiveRecord::Schema.define(version: 20160105161618) do
     t.string   "encrypted_password", limit: 128, null: false
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128, null: false
+<<<<<<< HEAD
     t.string   "phone"
+=======
+    t.string   "name"
+    t.string   "avatar"
+>>>>>>> 79bd2dc746742dddb82966d561fc0650334bb314
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
-  add_foreign_key "bookings", "resources"
   add_foreign_key "listings", "users"
 end

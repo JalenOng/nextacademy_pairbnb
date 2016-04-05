@@ -1,0 +1,17 @@
+<%= form_for :session, url: session_path do |form| %>
+  <div class="text-field">
+    <%= form.text_field :email, type: 'email', class: 'form-control full-width', placeholder: 'Email Address', required: true %>
+  </div>
+
+  <div class="password-field">
+    <%= form.password_field :password, class: 'form-control full-width', placeholder: 'Password', required: true %>
+  </div>
+
+  <div class="other-links">
+    <%= link_to t(".forgot_password"), new_password_path %>
+  </div>
+
+  <div class="submit-field">
+    <%= form.submit 'Log in', class: 'btn btn-block btn-large btn-pink full-width' %>
+  </div>
+<% end %>

@@ -1,51 +1,54 @@
-<% if listing.images.present? %>
-	<% listing.images.each do |img|%>
-
-	<%= image_tag img.url %>
-
-	<% end %>
-
-<% end %>
-
-<br>
-<br>
-
-Type: <%= listing.name %>
-
-<br>
-
-Bedrooms: <%= listing.bedroom %>
-
-<br>
-Accomodates: <%= listing.accomodates %>
-
-<br>
-
-Location: <%= listing.location %>
-
-<br>
-
-Price per night: RM <%= listing.price_per_night %>
-
-<br> 
-
-Tags: 
-
-<% if listing.tags.present? %>
-	<% listing.tags.each do |tag| %>
-	<%= tag.name %>
-	<% end %>
-<% end %>
-
-<br>
-
-Created by: <%= listing.user.email %>
-
-<br>
-<br>
+<%= provide :banner, 'listing' %>
+<%= provide :banner_image, @listing.images[0].url %>
+<div id="sub-container">
+	<div id="listing-header">
+		<div class="listing-header-user center-content">
+			<a href="/users/<%= @listing.user.id %>"><%= image_tag @listing.user.avatar, class: 'listing-header-avatar' %><br><%= @listing.user.name %></a>
+		</div>
+		<div id="listing-header-detail-container">
+			<h2><%= @listing.name %></h2>
+			<div class="listing-location">
+				<%= @listing.location.titleize %> <i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i><i class="fa fa-star fa-color-yellow"></i>
+			</div>
+			<div>
+				<div class="listing-header-detail center-content"><i class="fa fa-home fa-listing"></i><br><!--%= @listing.home_type %-->Apartment</div>
+			</div>
+			<div>
+				<div class="listing-header-detail center-content"><i class="fa fa-users fa-listing"></i><br><%= pluralize @listing.accomodates, 'guest' %></div>
+			</div>
+			<div>
+				<div class="listing-header-detail center-content"><i class="fa fa-bed fa-listing"></i><br><%= pluralize @listing.bedroom, 'bedroom' %></div>
+			</div>
+			<div>
+				<div class="listing-header-detail center-content"><i class="fa fa-cutlery fa-listing"></i><br>
+				<!--%= @listing.breakfast == true ? "Daily breakfast" : "No breakfast" %-->Daily breakfast</div>
+			</div>
+		</div>
+		<div id="listing-header-booking">
+			<div id="listing-header-price">
+				<span style="font-size: 1.5em;">RM<%= @listing.price_per_night %></span>
+			</div>
+			<div style="padding: 20px;">
+				<%= render 'reservations/form_instant' %>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
 
 
-<%= button_to "Reserve", new_listing_reservation_path(listing), :method => "get" %>
+	<div id="listing-body">
+		<h3>About this listing</h3>
+		<p><!--%= @listing.description %-->Offal gastropub asymmetrical, occupy kinfolk squid lomo echo park ugh mumblecore godard organic. Banh mi chicharrones squid, cold-pressed retro roof party authentic messenger bag pabst neutra. Meditation blog tofu, kitsch gochujang pinterest mixtape. You probably haven't heard of them listicle yuccie, photo booth umami shoreditch single-origin coffee tote bag marfa pitchfork. IPhone tacos austin, kombucha offal salvia post-ironic. Put a bird on it chambray kogi, selvage lomo you probably haven't heard of them plaid narwhal jean shorts PBR&B messenger bag pinterest. Readymade photo booth hoodie, try-hard brooklyn kickstarter blog lomo shabby chic pitchfork gentrify.</p>
+		<div class="tags"><!--%= display_tags(@listing) %--></div>
 
-
-
+		<% if !current_user.nil? and current_user.id == @listing.user.id %>
+			<%= link_to (button_tag "Edit", class: "btn btn-large btn-pink"), edit_listing_path(@listing) %>
+			<%= link_to (button_tag "Delete", class: "btn btn-large btn-pink"), listing_path(@listing), method: 'delete' %>
+		<% end %>
+		<div id="listing-thumbnail">
+			<% @listing.images.each_with_index do |image, index| %>
+				<%= image_tag @listing.images[index].url, class: 'listing-thumbnail-image' %>
+			<% end %>
+		</div>
+	</div>
+</div>

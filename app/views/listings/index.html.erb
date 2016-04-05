@@ -1,8 +1,61 @@
-<div class="hero-header">
-  <div class="main-text">Pair BnB</div>
-  <div class="sub-text">A place to find your next home</div>
+<div id="listing-divider">
+  <div id="listing-left">
+    <div id="listing-tools">
+      <% if logged_in? %>
+        <%= link_to (button_tag "Add new listing", class: "btn btn-large btn-pink"), new_listing_path %>
+        <% if !current_user.reservations.empty? %>
+          <h3 class="listing-tools-title">Your Reservations</h3>
+          <% current_user.reservations.each do |reservation| %>
+            <hr>
+            <div class="listing-reservation">
+              <div class="listing-reservation-item">
+                <div class="listing-reservation-item">
+                  <%= image_tag reservation.listing.images[0] if !reservation.listing.images[0].nil? %>
+                </div>
+                <div class="listing-reservation-item">
+                  <%= reservation.listing.name %><br>
+                  <%= reservation.start_time.strftime("%e %b %Y") %> until <%= reservation.end_time.strftime("%e %b %Y") %>
+                </div>
+              </div>
+              <div class="listing-reservation-item">
+                <%= link_to (button_tag "Delete", class: "btn btn-block btn-large btn-pink"), listing_reservation_path(reservation.listing, reservation), method: 'delete' %>
+              </div>            
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+      <h3 class="listing-tools-title">Filter</h3>
+      <hr>
+      <div class="listing-reservation-item">
+        <%= form_tag filter_listings_path, id: 'filter-form', remote: true do %>
+          <%= hidden_field_tag :location, @listings.first.location %>
+          Price Range <%= text_field_tag :from, nil, class: 'form-control' %> to <%= text_field_tag :to, nil, class: 'form-control' %> <%= submit_tag 'Filter', class: 'btn btn-medium btn-pink', id: 'filter-btn' %>
+        <% end %>
+      </div>
+    </div>
+    <div id="listing-container">
+      <div id="loading"></div>
+      <% if !@listings.nil? %>
+        <div id="listing-main">
+          <%= render 'listing_item', object: @listings %>
+        </div>
+      <% else %>
+        <p>No listing yet</p>
+      <% end %>
+    </div>
+    <div class="digg_pagination">
+      <div class="page_info">
+        <%= page_entries_info @listings %>
+      </div>
+      <%= will_paginate @listings, :container => false, previous_label: "&#9664;", next_label: "&#9654;" %>
+    </div>  
+  </div>
+  <div id="listing-map">
+    <div id="listing-map-canvas"></div>
+  </div>
 </div>
 
+<<<<<<< HEAD
 
   
 
@@ -23,22 +76,50 @@
 <button type="button" class="btn btn-default" aria-label="Left Align">
   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 </button>
+=======
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP_KEY'] %>">
+  </script>
+  <script type="text/javascript">
+    function set_map(state, city){
+      var mapOptions = {
+        center: new google.maps.LatLng(2.9214032,101.6209152),
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("listing-map-canvas"),
+      mapOptions);
+      
+      if(state == ""){
+        address = city;
+      }else{
+        address = state + ',' + city;
+      }
+>>>>>>> 79bd2dc746742dddb82966d561fc0650334bb314
 
-    <br><br>
-    
-    <%= will_paginate @listings %>
-    <br>
-    <br>
-    <%= render @listings %>
-    <%= will_paginate @listings %>
+      var geocoder = new google.maps.Geocoder();
 
+      geocoder.geocode({
+        'address':address
+      },
+      
+      function(result, status){
+        if (status == google.maps.GeocoderStatus.OK){
+          map.setCenter(result[0].geometry.location);
 
-<div class="div-one">
-  <div class="para-one">
-    <h1>About Us</h1>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
-  <div class="para-two">
-    <h1>Why use us</h1>
-    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-  </div>
-</div>
+          var marker = new google.maps.Marker({
+            map: map,
+            position: result[0].geometry.location
+          });
+        }else{
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+      return false;
+    };
+
+    $(document).on('ready page:load', function(){
+      debugger;
+      set_map('', '<%= @listings.first.location %>');
+    })
+  </script>
